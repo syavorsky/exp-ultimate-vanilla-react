@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>No CSS</title>
+    <script src="./vendor/react.min.js"></script>
+    <script src="./vendor/react-dom.min.js"></script>
+    <script>
+      'h1,h2,h3,div,p,ul,ol,li,span,a,i,b,del'
+      .split(',')
+      .forEach(function (tag) {
+        window[tag] = function (attrs, children) {
+          var children = Array.prototype.slice.call(arguments)
+          var attrs = (typeof children[0] === 'object' && !children[0].$$typeof) ? children.shift() : {}
+          return React.createElement(tag, attrs, children)
+        }
+        window[tag]._name = tag
+      })
+
+      function merge () { // merge(arg0, arg1, ..., argN)
+        if (Object.assign) return Object.assign.apply(Object, arguments)
+        return Array.prototype.slice.call(arguments, 0)
+          .reduce(function (res, obj) {
+            obj = obj || {}
+            for (var k in obj) { if (obj.hasOwnProperty(k)) res[k] = obj[k] }
+            return res
+          }, {})
+      }
+    </script>
+    <script>
+      var cls = {
+        headline: {
+          fontSize: '1.5em',
+          fontWeight: 'bold'
+        },
+        colored: {
+          color: '#070'
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      function App () { return (
+        div(
+          h1('Hello?'),
+          p(
+            'Was this really rendered? ',
+            b('really???')
+          ),
+          div({style: merge(cls.headline, cls.colored)},
+            'Welcome to React app built with'
+          ),
+          ul(
+            li('React'),
+            li(del('npm')),
+            li(del('JSX'))
+          ),
+          a({href: './no-require.html'}, 'I want modules!')
+        )
+      )}
+
+      ReactDOM.render(App(), document.getElementById('app'))
+    </script>
+  </body>
+</html>

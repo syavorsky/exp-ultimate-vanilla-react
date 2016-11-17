@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>No Require</title>
+    <script src="./vendor/react.min.js"></script>
+    <script src="./vendor/react-dom.min.js"></script>
+    <script src="./app/components/list/index.js"></script>
+    <script src="./app/components/list/styles.js"></script>
+    <script src="./app/index.js"></script>
+    <script src="./app/styles.js"></script>
+    <script src="./app/util/index.js"></script>
+    <script src="./app/util/env.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <a href="./no-webpack.html">Get rid of webpack</a>
+    <script>
+      ReactDOM.render(require(App)(), document.getElementById('app'))
+    </script>
+  </body>
+</html>

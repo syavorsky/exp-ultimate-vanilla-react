@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>No JSX</title>
+    <script src="./vendor/react.min.js"></script>
+    <script src="./vendor/react-dom.min.js"></script>
+    <script>
+      'h1,h2,h3,div,p,ul,ol,li,span,a,i,b,del'
+      .split(',')
+      .forEach(function (tag) {
+        window[tag] = function (attrs, children) {
+          var children = Array.prototype.slice.call(arguments)
+          var attrs = (typeof children[0] === 'object' && !children[0].$$typeof) ? children.shift() : {}
+          return React.createElement(tag, attrs, children)
+        }
+        window[tag]._name = tag
+      })
+    </script>
+    <style>
+      .headline {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+      .colored {
+        color: #070;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      function App () { return (
+        div(
+          h1('Hello?'),
+          p(
+            'Was this really rendered? ',
+            b('really???')
+          ),
+          div({className: 'headline colored'},
+            'Welcome to React app built with'
+          ),
+          ul(
+            li('React'),
+            li(del('npm')),
+            li(del('JSX'))
+          ),
+          a({href: './no-css.html'}, 'How about CSS')
+        )
+      )}
+
+      ReactDOM.render(App(), document.getElementById('app'))
+    </script>
+  </body>
+</html>
