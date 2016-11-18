@@ -1,10 +1,11 @@
 ## React App with:
   - JavaScript
   - ~~JSX~~
-  - ~~CSS modules~~
+  - ~~CSS~~
   - ~~Webpack~~
 
 ```
+> ./build.sh
 > npm i -g http-server
 > http-server
 ```
