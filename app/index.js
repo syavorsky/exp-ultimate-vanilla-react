@@ -1,9 +1,9 @@
 
 function App () {
 
-  var list = List()
-  var cls = AppStyles()
-  var merge = Util().merge
+  var list = require(List)
+  var cls = require(AppStyles)
+  var merge = require(Util).merge
 
   return component(function () { return (
     div({style: cls.root},
